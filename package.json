@@ -1,0 +1,13 @@
+{
+  "name": "pictopal-backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:omgitsgod/pictopal-backend.git",
+  "author": "omgitsgod <omgitsgod@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "ws": "^7.0.1"
+  }
+}
