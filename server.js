@@ -16,8 +16,10 @@ app.get('/', function(req, res, next){
 app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
     console.log(msg);
+    ws.send(`You just said: ${msg}`)
   });
-  console.log('socket', req.testing);
+  ws.send('Hello! Message From Server!!')
+  console.log('clients:', req.testing);
 });
 
 app.listen(3000, ()=> console.log("helllooooo"));
