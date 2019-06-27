@@ -26,7 +26,7 @@ app.ws('/', function(ws, req) {
 
   ws.on('close', () => {
     --clients
-    console.log('disconnected');
+    console.log(`user disconnected, Clients: ${clients}`);
 });
 });
 
