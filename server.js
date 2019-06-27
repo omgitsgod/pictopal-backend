@@ -28,4 +28,4 @@ app.ws('/', function(ws, req) {
 });
 });
 
-app.listen(port, ()=> console.log("Listening!"));
+app.listen(port, ()=> console.log(`Listening on port ${port}`));
