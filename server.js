@@ -21,6 +21,9 @@ app.ws('/', function(ws, req) {
   });
   ws.send('Hello! Message From Server!!')
   console.log('clients:', req.testing);
+  ws.on('close', () => {
+    console.log('disconnected');
+});
 });
 
 app.listen(port, ()=> console.log("helllooooo"));
