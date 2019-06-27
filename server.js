@@ -19,11 +19,13 @@ app.ws('/', function(ws, req) {
     console.log(msg);
     ws.send(`You just said: ${msg}`)
   });
+
   ws.send('Hello! Message From Server!!')
   console.log('clients:', req.testing);
+
   ws.on('close', () => {
     console.log('disconnected');
 });
 });
 
-app.listen(port, ()=> console.log("helllooooo"));
+app.listen(port, ()=> console.log("Listening!"));
