@@ -1,6 +1,7 @@
-var express = require('express');
-var app = express();
-var expressWs = require('express-ws')(app);
+const express = require('express');
+const app = express();
+const expressWs = require('express-ws')(app);
+const port = process.env.PORT || 5000;
 
 app.use(function (req, res, next) {
   console.log('middleware');
@@ -22,4 +23,4 @@ app.ws('/', function(ws, req) {
   console.log('clients:', req.testing);
 });
 
-app.listen(3000, ()=> console.log("helllooooo"));
+app.listen(port, ()=> console.log("helllooooo"));
