@@ -10,7 +10,8 @@ passport.use(
     {
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
-      callback: `${process.env.HOST}/auth/google/callback`
+      callback: `${process.env.HOST}/auth/google/callback`,
+      redirectUri: 'postmessage'
     },
     (accessToken, refreshToken, profile, done) => {
       const userData = {
