@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const passport = require(“passport”);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
