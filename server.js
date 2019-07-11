@@ -7,16 +7,28 @@ const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
 
-app.use(function (req, res, next) {
-  console.log('middleware');
-  req.testing = 'testing';
-  return next();
-});
+
+app.use(passport.initialize());
+require("./config/passport");
 
 app.get('/', function(req, res, next){
-  console.log('get route', req.testing);
+  console.log("Accessing Index");
   res.end();
 });
+
+app.get(
+  '/auth/google',
+	passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+.get(
+	'/auth/google/callback',
+	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: false }),
+	function(req, res) {
+		const token = req.user.token;
+		res.redirect(`${process.env.CLIENT}?token=` + token);
+	}
+);
 
 app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
