@@ -21,7 +21,7 @@ app.get(
 	passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-.get(
+app.get(
 	'/auth/google/callback',
 	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: false }),
 	function(req, res) {
