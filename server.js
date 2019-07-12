@@ -7,6 +7,7 @@ const passport = require('passport');
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
+let loggedIn = []
 let logged = []
 
 app.use(passport.initialize());
@@ -29,8 +30,16 @@ app.get(
     const user = req.user;
 		const token = user.token;
     logged.push(user)
-    console.log(logged);
+    loggedIn.includes(user) ? null : loggedIn.push(user)
+    console.log(loggedIn);
 		res.redirect(`${process.env.CLIENT}?token=` + token);
+	}
+);
+
+app.get(
+  '/logout/:token,' cors(), function(req, res) {
+    loggedIn = loggedIn.filter(x => x.token !== req.params.token)
+    console.log('currently online: ', loggedIn);
 	}
 );
 
