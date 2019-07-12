@@ -39,7 +39,7 @@ app.get(
     const skim = ({email, name}) => ({email, name})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log(user);
-    res.json({hello: 'hello'})
+    res.send(JSON.stringify(user))
 	}
 );
 
