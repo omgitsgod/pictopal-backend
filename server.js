@@ -34,6 +34,14 @@ app.get(
 );
 
 app.get(
+  '/getUser/:token', function(req, res) {
+    const skim = ({email, name}) => ({email, name})
+    const user = logged.filter(x => x.token === req.params.token)
+    res.send(skim(user))
+	}
+);
+
+app.get(
   '/logout', function(req, res) {
 
     console.log(logged);
