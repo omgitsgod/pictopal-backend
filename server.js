@@ -40,7 +40,7 @@ app.get(
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log(user);
     console.log(logged);
-    res.json(user)
+    res.json(skim(user))
 	}
 );
 
