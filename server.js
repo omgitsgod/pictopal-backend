@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const passport = require('passport');
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
@@ -34,7 +35,7 @@ app.get(
 );
 
 app.get(
-  '/getUser/:token', function(req, res) {
+  '/getUser/:token', cors(), function(req, res) {
     const skim = ({email, name}) => ({email, name})
     const user = logged.filter(x => x.token === req.params.token)
     res.send(skim(user))
