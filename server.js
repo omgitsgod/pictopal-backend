@@ -37,7 +37,7 @@ app.get(
 );
 
 app.get(
-  '/logout/:token,' cors(), function(req, res) {
+  '/logout/:token,', cors(), function(req, res) {
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
     console.log('currently online: ', loggedIn);
 	}
