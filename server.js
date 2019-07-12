@@ -23,10 +23,10 @@ app.get(
 
 app.get(
 	'/auth/google/callback',
-	passport.authenticate('google', { failureRedirect: 'https://pictopal.netlify.com/', session: false }),
+	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: false }),
 	function(req, res) {
 		const token = req.user.token;
-		res.redirect(`https://pictopal.netlify.com/?token=` + token);
+		res.redirect(`${process.env.CLIENT}?token=` + token);
 	}
 );
 
