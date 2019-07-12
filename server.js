@@ -26,6 +26,7 @@ app.get(
 	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: false }),
 	function(req, res) {
 		const token = req.user.token;
+    console.log(req.user);
 		res.redirect(`${process.env.CLIENT}?token=` + token);
 	}
 );
