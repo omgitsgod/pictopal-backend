@@ -6,7 +6,7 @@ const passport = require('passport');
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
-
+let logged = []
 
 app.use(passport.initialize());
 require("./config/passport");
@@ -25,9 +25,19 @@ app.get(
 	'/auth/google/callback',
 	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: false }),
 	function(req, res) {
-		const token = req.user.token;
-    console.log(req.user);
+    const user = req.user;
+		const token = user.token;
+    logged.push(user)
+    console.log(logged);
 		res.redirect(`${process.env.CLIENT}?token=` + token);
+	}
+);
+
+app.get(
+  '/logout', function(req, res) {
+
+    console.log(logged);
+		res.redirect(`${process.env.CLIENT});
 	}
 );
 
