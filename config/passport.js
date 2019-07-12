@@ -10,8 +10,7 @@ passport.use(
     {
       clientID: process.env.CLIENTID,
       clientSecret: process.env.CLIENTSECRET,
-      callbackURL: `https://pictopal-backend.herokuapp.com/auth/google/callback`,
-      redirectUri: 'postmessage'
+      callbackURL: `${process.env.HOST}/auth/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
       const userData = {
