@@ -16,6 +16,7 @@ passport.use(
       const userData = {
         email: profile.emails[0].value,
         name: profile.displayName,
+        profile: profile,
         token: accessToken
       };
       done(null, userData);
