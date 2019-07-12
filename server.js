@@ -37,7 +37,7 @@ app.get(
   '/logout', function(req, res) {
 
     console.log(logged);
-		res.redirect(`${process.env.CLIENT});
+		res.redirect(process.env.CLIENT);
 	}
 );
 
