@@ -35,7 +35,7 @@ app.get(
 );
 
 app.get(
-  '/getUser/:token', function(req, res) {
+  '/getUser/:token', cors(), function(req, res) {
     const skim = ({email, name}) => ({email, name})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log(user);
