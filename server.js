@@ -37,6 +37,12 @@ app.get(
 );
 
 app.get(
+  'authenticate/:token' ,cors(), function(req, res) {
+
+	}
+);
+
+app.get(
   '/logout/:token,', cors(), function(req, res) {
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
     console.log('currently online: ', loggedIn);
@@ -45,7 +51,7 @@ app.get(
 
 app.get(
   '/getUser/:token', cors(), function(req, res) {
-    const skim = ({email, name}) => ({email, name})
+    const skim = ({email, name, profile}) => ({email, name, profile})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log(user);
     console.log('currently online: ', loggedIn);
