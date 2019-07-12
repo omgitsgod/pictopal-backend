@@ -48,7 +48,7 @@ app.get(
     const skim = ({email, name}) => ({email, name})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log(user);
-    console.log(logged);
+    console.log('currently online: ', loggedIn);
     res.json(skim(user))
 	}
 );
