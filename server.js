@@ -57,7 +57,7 @@ app.get(
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log(user);
     console.log('currently online: ', loggedIn);
-    res.json(skim(user))
+    res.json(user)
 	}
 );
 
