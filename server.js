@@ -33,7 +33,7 @@ app.get(
     //console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
-    console.log(loggedIn.map(x=> x.name));
+    console.log('Getting User:', loggedIn.map(x=> x.name));
 		res.redirect(`${process.env.CLIENT}?token=` + token);
 	}
 );
