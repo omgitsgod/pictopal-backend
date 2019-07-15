@@ -46,7 +46,9 @@ app.get(
 
 app.get(
   '/logout/:token', cors(), function(req, res) {
+    console.log('loggout out: ', loggedIn.filter(x => x.token === req.params.token)[0].name);
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
+    console.log('loggout out: ');
     console.log('currently online: ', loggedIn.map(x=> x.name));
 	}
 );
