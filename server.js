@@ -33,7 +33,7 @@ app.get(
     //console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
-    console.log(loggedIn);
+    console.log(loggedIn.map(x=> x.name));
 		res.redirect(`${process.env.CLIENT}?token=` + token);
 	}
 );
@@ -47,7 +47,7 @@ app.get(
 app.get(
   '/logout/:token', cors(), function(req, res) {
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
-    console.log('currently online: ', loggedIn);
+    console.log('currently online: ', loggedIn.map(x=> x.name));
 	}
 );
 
@@ -55,8 +55,8 @@ app.get(
   '/getUser/:token', cors(), function(req, res) {
     const skim = ({email, name, profile}) => ({email, name, profile})
     const user = logged.filter(x => x.token === req.params.token)[0]
-    console.log('logging in: ', user);
-    console.log('currently online: ', loggedIn);
+    console.log('logging in: ', user.name);
+    console.log('currently online: ', loggedIn.map(x=> x.name));
     res.json(user)
 	}
 );
