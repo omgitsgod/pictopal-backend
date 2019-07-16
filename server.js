@@ -21,7 +21,7 @@ function isLoggedIn(req, res, next) {
 
 app.use(passport.initialize());
 require("./config/passport");
-app.use(session({ secret: process.env.SECRET, cookie: { maxAge: 60000 }}))
+app.use(session({ secret: process.env.SECRET, resave:false, saveUninitialized: false, cookie: { maxAge: 60000 }}))
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
