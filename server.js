@@ -71,7 +71,7 @@ app.get(
 app.get(
   '/getUser/:token', cors(), function(req, res) {
     console.log('req.session test', req.session);
-    const skim = ({email, name, profile}) => ({email, name, profile})
+    const skim = ({email, name, photo}) => ({email, name, photo})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
