@@ -11,6 +11,14 @@ let clients = 0
 let loggedIn = []
 let logged = []
 
+function isLoggedIn(req, res, next) {
+  if (req.session.user !== undefined) {
+    next();
+  } else {
+    res.redirect("/");
+  }
+}
+
 app.use(passport.initialize());
 require("./config/passport");
 app.use(session({ secret: process.env.SECRET, cookie: { maxAge: 60000 }}))
@@ -56,19 +64,11 @@ app.get(
 
 app.get(
   '/getUser/:token', cors(), function(req, res) {
-    const skim = ({email, name, profile}) => ({email, name, profile})
+    const skim = ({email, name, profile}) => ({email, name, profile.photos})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
     res.json(user)
-	}
-);
-
-app.get(
-  '/logout', function(req, res) {
-
-    console.log(logged);
-		res.redirect(process.env.CLIENT);
 	}
 );
 
