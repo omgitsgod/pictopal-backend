@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const passport = require('passport');
+const session = require('express-session');
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
@@ -12,6 +13,7 @@ let logged = []
 
 app.use(passport.initialize());
 require("./config/passport");
+app.use(session({ secret: process.env.SECRET, cookie: { maxAge: 60000 }}))
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
@@ -29,8 +31,8 @@ app.get(
 	function(req, res) {
     const user = req.user;
 		const token = user.token;
-    //req.session.user = req.user;
-    //console.log('session: ', req.session);
+    req.session.user = req.user;
+    console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
     console.log('Getting User:', loggedIn.map(x=> x.name));
