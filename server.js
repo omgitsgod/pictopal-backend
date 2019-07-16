@@ -79,6 +79,13 @@ app.get(
 	}
 );
 
+app.get(
+  '/onlineList', cors(), function(req, res) {
+    const list = loggedIn.map(x => x.name)
+    res.json(list)
+  }
+);
+
 app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
     console.log(msg);
