@@ -70,6 +70,7 @@ app.get(
 
 app.get(
   '/getUser/:token', cors(), function(req, res) {
+    console.log('req.session test', req.session.user.name);
     const skim = ({email, name, profile}) => ({email, name, profile})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log('logging in: ', user.name);
