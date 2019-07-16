@@ -49,7 +49,13 @@ app.get(
 );
 
 app.get(
-  'authenticate/:token' ,cors(), function(req, res) {
+  '/test', cors(), function(req, res) {
+    console.log(logged);
+	}
+);
+
+app.get(
+  '/authenticate/:token' ,cors(), function(req, res) {
 
 	}
 );
