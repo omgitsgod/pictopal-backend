@@ -6,6 +6,7 @@
   "author": "omgitsgod <omgitsgod@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "connect-redis": "^3.4.2",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -13,6 +14,7 @@
     "express-ws": "^4.0.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
+    "redis": "^2.8.0",
     "ws": "^7.0.1"
   }
 }
