@@ -5,18 +5,18 @@ const app = express();
 const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
-const redis = require('redis');
-const redisClient = redis.createClient();
-const redisStore = require('connect-redis')(session);
+//const redis = require('redis');
+//const redisClient = redis.createClient();
+//const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
 let loggedIn = []
 let logged = []
 
-redisClient.on('error', (err) => {
-  console.log('Redis error: ', err);
-});
+//redisClient.on('error', (err) => {
+//  console.log('Redis error: ', err);
+//});
 
 function isLoggedIn(req, res, next) {
   if (req.session.user !== undefined) {
@@ -28,7 +28,14 @@ function isLoggedIn(req, res, next) {
 
 app.use(passport.initialize());
 require("./config/passport");
-app.use(session({ secret: process.env.SECRET, name: 'PictoPal', resave:false, saveUninitialized: false, cookie: {secure: false, maxAge: 60000 }, store: new redisStore({host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400})}))
+app.use(session({
+  secret: process.env.SECRET,
+  name: 'PictoPal',
+  resave:false,
+  saveUninitialized: false,
+  cookie: {secure: false, maxAge: 60000 },
+  //store: new redisStore({host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400})
+}))
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
