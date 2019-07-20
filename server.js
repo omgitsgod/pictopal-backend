@@ -14,6 +14,10 @@ let clients = 0
 let loggedIn = []
 let logged = []
 
+redisClient.on('error', (err) => {
+  console.log('Redis error: ', err);
+});
+
 function isLoggedIn(req, res, next) {
   if (req.session.user !== undefined) {
     next();
