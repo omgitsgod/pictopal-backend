@@ -62,7 +62,7 @@ app.get(
 	function(req, res) {
     const user = req.user;
 		const token = user.token;
-  //  req.session.user = req.user;
+    req.session.user = req.user;
     console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
