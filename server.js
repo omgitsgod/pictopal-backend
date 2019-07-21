@@ -44,7 +44,7 @@ app.use(session({
   secret: process.env.SECRET,
   name: 'PictoPal',
   resave:false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {secure: false, maxAge: 60000 },
   store: new redisStore({client:redisClient})
 }))
