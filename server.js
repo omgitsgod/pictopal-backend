@@ -40,7 +40,7 @@ require("./config/passport");
 app.use(session({
   secret: process.env.SECRET,
   name: 'PictoPal',
-  resave:true,
+  resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
   store: new redisStore({host: redisUrl.hostname,  port: redisUrl.port, db:0, pass: redisAuth[1]})
@@ -63,6 +63,7 @@ app.get(
     const user = req.user;
 		const token = user.token;
     req.session.user = req.user;
+    req.session.save((err)=> console.log(err))
     console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
