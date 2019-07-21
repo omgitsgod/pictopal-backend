@@ -26,6 +26,9 @@ redisClient.auth(redisAuth[1], ()=>console.log('connected to redis'))
 redisClient.on('error', (err) => {
   console.log('Redis error: ', err);
 });
+redisClient.on('connect', ()=>{
+    console.log('Connected to Redis');
+});
 
 function isLoggedIn(req, res, next) {
   if (req.session.user !== undefined) {
