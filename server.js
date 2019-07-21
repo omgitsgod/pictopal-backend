@@ -22,7 +22,7 @@ console.log('redisurl',redisURL);
 console.log('redis port', redisURL.port);
 console.log('redis host', redisURL.host);
 
-redisClient.auth(redisAuth[1], ()=>console.log('connected to redis'))
+redisClient.auth(redisAuth[1], ()=>console.log('Redis Authorized'))
 redisClient.on('error', (err) => {
   console.log('Redis error: ', err);
 });
@@ -46,7 +46,7 @@ app.use(session({
   resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
-  store: new redisStore({url:redisURL.href})
+  store: new redisStore({client:redisClient})
 }))
 
 app.get('/', function(req, res, next){
