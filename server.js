@@ -43,7 +43,7 @@ app.use(session({
   resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
-  store: new redisStore({url:redisurl.href})
+  store: new redisStore({url:redisUrl.href})
 }))
 
 app.get('/', function(req, res, next){
