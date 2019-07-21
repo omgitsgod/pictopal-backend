@@ -74,7 +74,7 @@ app.get(
 
 app.get(
   '/test', cors(), function(req, res) {
-    console.log(req.session);
+    console.log(req.session.user);
 	}
 );
 
