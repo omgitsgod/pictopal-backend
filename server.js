@@ -1,4 +1,4 @@
-
+redisURL
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -6,8 +6,8 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const url = require('url');
-const redisUrl = url.parse(process.env.REDISCLOUD_URL);
-const redisAuth = redisUrl.auth.split(':');
+const redisURL = url.parse(process.env.REDISCLOUD_URL);
+const redisAuth = redisURL.auth.split(':');
 const redis = require('redis');
 const redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
 const redisStore = require('connect-redis')(session);
@@ -18,9 +18,9 @@ let loggedIn = []
 let logged = []
 
 console.log(redisAuth);
-console.log('redisurl',redisUrl);
-console.log('redis port', redisUrl.port);
-console.log('redis host', redisUrl.host);
+console.log('redisurl',redisURL);
+console.log('redis port', redisURL.port);
+console.log('redis host', redisURL.host);
 
 redisClient.auth(redisAuth[1], ()=>console.log('connected to redis'))
 redisClient.on('error', (err) => {
@@ -43,7 +43,7 @@ app.use(session({
   resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
-  store: new redisStore({url:redisUrl.href})
+  store: new redisStore({url:redisURL.href})
 }))
 
 app.get('/', function(req, res, next){
