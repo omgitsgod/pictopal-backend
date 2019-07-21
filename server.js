@@ -55,9 +55,10 @@ app.get('/', function(req, res, next){
 });
 
 app.get(
-  '/auth/google',
+  '/auth/google', function (req,res) {
   req.session.ids = req.session.id
 	passport.authenticate('google', { scope: ['profile', 'email'] })
+}
 );
 
 app.get(
