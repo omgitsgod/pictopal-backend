@@ -40,7 +40,7 @@ require("./config/passport");
 app.use(session({
   secret: process.env.SECRET,
   name: 'PictoPal',
-  resave:false,
+  resave:true,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
   store: new redisStore({host: redisUrl.hostname,  port: redisUrl.port, db:0, pass: redisAuth[1]})
