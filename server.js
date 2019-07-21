@@ -9,7 +9,7 @@ const url = require('url');
 const redisUrl = url.parse(process.env.REDISTOGO_URL);
 const redisAuth = redisUrl.auth.split(':');
 const redis = require('redis');
-const redisClient = redis.createClient(parseInt(redisUrl.port),redisUrl.hostname);
+const redisClient = redis.createClient(redisUrl.port,redisUrl.hostname);
 const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
@@ -43,7 +43,7 @@ app.use(session({
   resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
-  store: new redisStore({host: redisUrl.hostname, client: redisClient, port: redisUrl.port, db: 1, pass: redisAuth[1]})
+  store: new redisStore({host: redisUrl.hostname, client: redisClient, port: redisUrl.port, pass: redisAuth[1]})
 }))
 
 app.get('/', function(req, res, next){
