@@ -7,7 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const url = require('url');
 const redisUrl = url.parse(process.env.REDISTOGO_URL);
-const redisAuth = redisUrl.auth.split(‘:’);
+const redisAuth = redisUrl.auth.split(':');
 //const redis = require('redis');
 //const redisClient = redis.createClient();
 const redisStore = require('connect-redis')(session);
@@ -17,8 +17,8 @@ let clients = 0
 let loggedIn = []
 let logged = []
 
-redisClient.on('error', (err) => {
-  console.log('Redis error: ', err);
+//redisClient.on('error', (err) => {
+//  console.log('Redis error: ', err);
 //});
 
 function isLoggedIn(req, res, next) {
