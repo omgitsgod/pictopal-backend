@@ -6,17 +6,19 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const url = require('url');
+const redisUrl = url.parse(process.env.REDISTOGO_URL);
+const redisAuth = redisUrl.auth.split(‘:’);
 //const redis = require('redis');
 //const redisClient = redis.createClient();
-//const redisStore = require('connect-redis')(session);
+const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
 let clients = 0
 let loggedIn = []
 let logged = []
 
-//redisClient.on('error', (err) => {
-//  console.log('Redis error: ', err);
+redisClient.on('error', (err) => {
+  console.log('Redis error: ', err);
 //});
 
 function isLoggedIn(req, res, next) {
@@ -35,7 +37,7 @@ app.use(session({
   resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
-  //store: new redisStore({host: process.env.HOST, port: 6379, client: redisClient, ttl: 86400})
+  store: new redisStore({host: redisUrl.hostname, port: redisUrl.port, db: redisAuth[0], pass: redisAuth[1]})
 }))
 
 app.get('/', function(req, res, next){
