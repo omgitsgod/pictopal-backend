@@ -17,6 +17,7 @@ let clients = 0
 let loggedIn = []
 let logged = []
 
+console.log(redisAuth);
 //redisClient.on('error', (err) => {
 //  console.log('Redis error: ', err);
 //});
