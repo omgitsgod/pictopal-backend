@@ -18,6 +18,7 @@ let loggedIn = []
 let logged = []
 
 console.log(redisAuth);
+console.log('redisurl',redisUrl);
 console.log('redis port', redisUrl.port);
 console.log('redis host', redisUrl.host);
 redisClient.on('error', (err) => {
