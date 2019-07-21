@@ -8,8 +8,8 @@ const session = require('express-session');
 const url = require('url');
 const redisUrl = url.parse(process.env.REDISTOGO_URL);
 const redisAuth = redisUrl.auth.split(':');
-//const redis = require('redis');
-//const redisClient = redis.createClient();
+const redis = require('redis');
+const redisClient = redis.createClient(redisAuth[0],redisAuth[1]);
 const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
@@ -18,9 +18,9 @@ let loggedIn = []
 let logged = []
 
 console.log(redisAuth);
-//redisClient.on('error', (err) => {
-//  console.log('Redis error: ', err);
-//});
+redisClient.on('error', (err) => {
+  console.log('Redis error: ', err);
+});
 
 function isLoggedIn(req, res, next) {
   if (req.session.user !== undefined) {
