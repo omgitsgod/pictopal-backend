@@ -43,7 +43,7 @@ app.use(session({
   resave:false,
   saveUninitialized: false,
   cookie: {secure: false, maxAge: 60000 },
-  store: new redisStore({host: redisUrl.hostname, port: redisUrl.port, db: 1, pass: redisAuth[1]})
+  store: new redisStore({host: redisUrl.hostname, client: redisClient, port: redisUrl.port, db: 1, pass: redisAuth[1]})
 }))
 
 app.get('/', function(req, res, next){
