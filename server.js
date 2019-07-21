@@ -21,6 +21,8 @@ console.log(redisAuth);
 console.log('redisurl',redisUrl);
 console.log('redis port', redisUrl.port);
 console.log('redis host', redisUrl.host);
+
+redisClient.auth(redisAuth[1], ()=>console.log('connected to redis');)
 redisClient.on('error', (err) => {
   console.log('Redis error: ', err);
 });
