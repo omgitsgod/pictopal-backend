@@ -66,7 +66,6 @@ app.get(
     const user = req.user;
 		const token = user.token;
     req.session.user = req.user;
-    redisClient.set('user', JSON.stringify(req.user))
     console.log('id: ', req.session.id);
     console.log('session: ', req.session);
     logged.push(user)
@@ -79,8 +78,12 @@ app.get(
 app.get(
   '/test', cors(), function(req, res) {
     console.log(req.session);
-    console.log('id: ', req.session.id);
-    console.log(JSON.parse(redisClient.get('user')));
+    console.log('session id:', req.session.id)
+    const sessionKey = `sess:${req.session.id}`
+    redisClient.get(sessionKey, (err, data) => {
+    console.log('session data in redis:', data)
+  })
+  res.status(200).send('OK');
 	}
 );
 
