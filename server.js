@@ -6,7 +6,7 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const url = require('url');
-const redisURL = url.parse(process.env.REDISCLOUD_URL);
+const redisURL = url.parse(process.env.REDIS_URL);
 const redisAuth = redisURL.auth.split(':');
 const redis = require('redis');
 const redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
@@ -46,7 +46,7 @@ app.use(session({
   resave:false,
   saveUninitialized: true,
   cookie: {secure: false, maxAge: 60000 },
-  store: new redisStore({client:redisClient})
+  store: new redisStore({url:process.env.REDIS_URL})
 }))
 
 app.get('/', function(req, res, next){
