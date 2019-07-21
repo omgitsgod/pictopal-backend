@@ -63,7 +63,7 @@ app.get(
     const user = req.user;
 		const token = user.token;
     req.session.user = req.user;
-    req.session.save((err)=> console.log(err))
+    console.log('id: ', req.session.id);
     console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
@@ -95,6 +95,7 @@ app.get(
 app.get(
   '/getUser/:token', cors(), function(req, res) {
     console.log('req.session test', req.session);
+    console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log('logging in: ', user.name);
