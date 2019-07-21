@@ -6,10 +6,10 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const url = require('url');
-const redisUrl = url.parse(process.env.REDISTOGO_URL);
+const redisUrl = url.parse(process.env.REDISCLOUD_URL);
 const redisAuth = redisUrl.auth.split(':');
 const redis = require('redis');
-const redisClient = redis.createClient(redisUrl.port,redisUrl.hostname);
+const redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
 const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
@@ -63,6 +63,7 @@ app.get(
     const user = req.user;
 		const token = user.token;
     req.session.user = req.user;
+    redisClient.set('user', req.user)
     console.log('id: ', req.session.id);
     console.log('session: ', req.session);
     logged.push(user)
@@ -76,6 +77,7 @@ app.get(
   '/test', cors(), function(req, res) {
     console.log(req.session);
     console.log('id: ', req.session.id);
+    console.log(redisClient.get('user'));
 	}
 );
 
