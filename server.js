@@ -57,7 +57,7 @@ app.get(
 	function(req, res) {
     const user = req.user;
 		const token = user.token;
-  //  req.session.user = req.user;
+    req.session.user = req.user;
     console.log('session: ', req.session);
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
@@ -91,7 +91,7 @@ app.get(
     console.log('req.session test', req.session);
     const skim = ({email, name, photo}) => ({email, name, photo})
     const user = logged.filter(x => x.token === req.params.token)[0]
-  //  console.log('logging in: ', user.name);
+    console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
     res.json(user)
 	}
