@@ -37,7 +37,7 @@ function isLoggedIn(req, res, next) {
     res.redirect("/");
   }
 }
-app.set('trust proxy', 1)
+app.set('trust proxy')
 app.use(passport.initialize());
 require("./config/passport");
 app.use(session({
@@ -77,8 +77,6 @@ app.get(
 
 app.get(
   '/test', cors(), function(req, res) {
-    req.session.lala = "testing"
-    console.log('req.header',req.header);
     console.log(req.session);
     console.log('session id:', req.session.id)
     const sessionKey = `sess:${req.session.id}`
@@ -105,8 +103,6 @@ app.get(
 
 app.get(
   '/getUser/:token', cors(), function(req, res) {
-    console.log('req.header',req.header);
-    req.session.test = "lalalalala"
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
