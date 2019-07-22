@@ -103,6 +103,10 @@ app.get(
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
     console.log('currently online: ', loggedIn.map(x=> x.name));
 	}
+  req.session.destroy(function(err) {
+    console.log(err);
+})
+  res.status(200)
 );
 
 app.get(
@@ -113,14 +117,14 @@ app.get(
     const user = logged.filter(x => x.token === req.params.token)[0]
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
-    res.json(user)
+    res.status(200).json(user)
 	}
 );
 
 app.get(
   '/onlineList', function(req, res) {
     const list = loggedIn.map(x => x.name)
-    res.json(list)
+    res.status(200).json(list)
   }
 );
 
