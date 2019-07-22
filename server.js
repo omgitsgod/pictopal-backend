@@ -48,6 +48,9 @@ app.use(session({
   cookie: {secure: false, maxAge: 600000 },
   store: new redisStore({url:process.env.REDIS_URL})
 }))
+app.use(cors({
+  origin: 'https://pictopal.netlify.com/'
+}));
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
@@ -76,7 +79,7 @@ app.get(
 );
 
 app.get(
-  '/test', cors(), function(req, res) {
+  '/test', function(req, res) {
     console.log(req.session);
     console.log('session id:', req.session.id)
     const sessionKey = `sess:${req.session.id}`
@@ -88,13 +91,13 @@ app.get(
 );
 
 app.get(
-  '/authenticate/:token' ,cors(), function(req, res) {
+  '/authenticate/:token', function(req, res) {
 
 	}
 );
 
 app.get(
-  '/logout/:token', cors(), function(req, res) {
+  '/logout/:token', function(req, res) {
     console.log('logging out: ', loggedIn.filter(x => x.token === req.params.token)[0].name);
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
     console.log('currently online: ', loggedIn.map(x=> x.name));
@@ -102,7 +105,7 @@ app.get(
 );
 
 app.get(
-  '/getUser/:token', cors(), function(req, res) {
+  '/getUser/:token', function(req, res) {
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
@@ -114,7 +117,7 @@ app.get(
 );
 
 app.get(
-  '/onlineList', cors(), function(req, res) {
+  '/onlineList', function(req, res) {
     const list = loggedIn.map(x => x.name)
     res.json(list)
   }
