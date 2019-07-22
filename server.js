@@ -102,11 +102,9 @@ app.get(
     console.log('logging out: ', loggedIn.filter(x => x.token === req.params.token)[0].name);
     loggedIn = loggedIn.filter(x => x.token !== req.params.token)
     console.log('currently online: ', loggedIn.map(x=> x.name));
+    req.session.destroy((err) => console.log(err))
+    res.sendStatus(200)
 	}
-  req.session.destroy(function(err) {
-    console.log(err);
-})
-  res.status(200)
 );
 
 app.get(
