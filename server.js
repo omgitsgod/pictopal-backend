@@ -103,6 +103,7 @@ app.get(
 
 app.get(
   '/getUser/:token', cors(), function(req, res) {
+    req.session.test = "lalalalala"
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
