@@ -49,7 +49,7 @@ app.use(session({
   store: new redisStore({url:process.env.REDIS_URL})
 }))
 app.use(cors({
-  origin: 'https://pictopal.netlify.com/'
+  origin: 'https://pictopal.netlify.com'
 }));
 
 app.get('/', function(req, res, next){
