@@ -37,7 +37,7 @@ function isLoggedIn(req, res, next) {
     res.redirect("/");
   }
 }
-
+app.set('trust proxy', 1)
 app.use(passport.initialize());
 require("./config/passport");
 app.use(session({
