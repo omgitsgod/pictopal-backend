@@ -75,7 +75,7 @@ app.get(
     logged.push(user)
     loggedIn.includes(user) ? null : loggedIn.push(user)
     console.log('Getting User:', loggedIn.map(x=> x.name));
-		res.redirect(`${process.env.CLIENT}?token=` + token);
+		res.redirect(`${process.env.CLIENT}`);
 	}
 );
 
@@ -98,9 +98,9 @@ app.get(
 );
 
 app.get(
-  '/logout/:token', function(req, res) {
-    console.log('logging out: ', loggedIn.filter(x => x.token === req.params.token)[0].name);
-    loggedIn = loggedIn.filter(x => x.token !== req.params.token)
+  '/logout/', function(req, res) {
+    console.log('logging out: ', loggedIn.filter(x => x.token === req.session.user.token)[0].name);
+    loggedIn = loggedIn.filter(x => x.token !== req.session.user.token)
     console.log('currently online: ', loggedIn.map(x=> x.name));
     req.session.destroy((err) => console.log(err))
     res.sendStatus(200)
@@ -108,12 +108,12 @@ app.get(
 );
 
 app.get(
-  '/getUser/:token', function(req, res) {
+  '/getUser', function(req, res) {
     if (req.session.user) {
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
-    const user = logged.filter(x => x.token === req.params.token)[0]
+    const user = logged.filter(x => x.token === req.session.user.token)[0]
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
     res.status(200).json(user)
