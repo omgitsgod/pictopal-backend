@@ -122,7 +122,7 @@ app.get(
 );
 app.get(
   '/close', function(req, res) {
-    redisStore.clear((err) => console.log(err))
+    store.clear((err) => console.log(err))
 	}
 );
 
