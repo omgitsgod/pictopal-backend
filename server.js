@@ -108,7 +108,7 @@ app.get(
 );
 
 app.get(
-  '/getUser/', function(req, res) {
+  '/getUser', function(req, res) {
     if (req.session.user) {
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
