@@ -119,7 +119,7 @@ app.get(
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
     res.status(200).json(user)
-  } else {req.session.destroy((err) =>console.log(err)}
+  } else {req.session.destroy((err) =>console.log(err))}
   }
 	}
 );
