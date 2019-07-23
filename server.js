@@ -109,6 +109,7 @@ app.get(
 
 app.get(
   '/getUser/:token', function(req, res) {
+    if (req.session.user) {
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
@@ -116,6 +117,7 @@ app.get(
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
     res.status(200).json(user)
+  }
 	}
 );
 
