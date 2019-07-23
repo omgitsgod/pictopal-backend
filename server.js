@@ -122,7 +122,7 @@ app.get(
 );
 app.get(
   '/close', function(req, res) {
-    store.clear((err) => console.log(err))
+    session.store.clear((err) => console.log(err))
 	}
 );
 
