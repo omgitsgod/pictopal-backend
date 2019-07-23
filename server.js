@@ -46,7 +46,8 @@ app.use(session({
   resave:false,
   saveUninitialized: true,
   cookie: {secure: false, maxAge: 600000 },
-  store: new redisStore({url:process.env.REDIS_URL})
+  store: new redisStore({url:process.env.REDIS_URL}),
+  clear: (err)=> console.log(err)
 }))
 app.use(cors({
   origin: 'https://pictopal.netlify.com',
@@ -113,10 +114,12 @@ app.get(
     console.log('req.session test', req.session);
     console.log('id: ', req.session.id);
     const skim = ({email, name, photo}) => ({email, name, photo})
+    if (logged.filter(x => x.token === req.session.user.token)[0]) {
     const user = logged.filter(x => x.token === req.session.user.token)[0]
     console.log('logging in: ', user.name);
     console.log('currently online: ', loggedIn.map(x=> x.name));
     res.status(200).json(user)
+  } else {req.session.destroy((err) =>console.log(err)}
   }
 	}
 );
