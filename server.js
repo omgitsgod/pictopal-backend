@@ -66,7 +66,7 @@ app.get(
 
 app.get(
 	'/auth/google/callback',
-	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: false }),
+	passport.authenticate('google', { failureRedirect: process.env.CLIENT, session: true }),
 	function(req, res) {
     const user = req.user;
 		const token = user.token;
