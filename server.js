@@ -40,6 +40,7 @@ app.use(session({
 }))
 app.set('trust proxy')
 app.use(passport.initialize());
+app.use(passport.session());
 require("./config/passport");
 app.use(cors({
   origin: 'https://pictopal.netlify.com',
