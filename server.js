@@ -29,17 +29,6 @@ redisClient.on('error', (err) => {
 redisClient.on('connect', ()=>{
     console.log('Connected to Redis');
 });
-
-function isLoggedIn(req, res, next) {
-  if (req.session.user !== undefined) {
-    next();
-  } else {
-    res.redirect("/");
-  }
-}
-app.set('trust proxy')
-app.use(passport.initialize());
-require("./config/passport");
 app.use(session({
   secret: process.env.SECRET,
   name: 'PictoPal',
@@ -49,10 +38,20 @@ app.use(session({
   store: new redisStore({url:process.env.REDIS_URL}),
   clear: (err)=> console.log(err)
 }))
+app.set('trust proxy')
+app.use(passport.initialize());
+require("./config/passport");
 app.use(cors({
   origin: 'https://pictopal.netlify.com',
   credentials: true
 }));
+function isLoggedIn(req, res, next) {
+  if (req.session.user !== undefined) {
+    next();
+  } else {
+    res.redirect("/");
+  }
+}
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
