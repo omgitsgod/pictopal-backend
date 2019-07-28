@@ -42,7 +42,7 @@ app.set('trust proxy')
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
-require('./src/models')
+const models = require('./src/models')
 app.use(cors({
   origin: 'https://pictopal.netlify.com',
   credentials: true
@@ -55,7 +55,7 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-console.log(connectDb);
+console.log(models.connectDb);
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
