@@ -10,4 +10,4 @@ const models = {User};
 
 //export {connectDb};
 
-export default models;
+//export default models;
