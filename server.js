@@ -41,7 +41,8 @@ app.use(session({
 app.set('trust proxy')
 app.use(passport.initialize());
 app.use(passport.session());
-require("./config/passport");
+require('./config/passport');
+require('./src/models')
 app.use(cors({
   origin: 'https://pictopal.netlify.com',
   credentials: true
