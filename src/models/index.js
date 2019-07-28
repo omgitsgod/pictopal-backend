@@ -11,3 +11,6 @@ const connectDb = () => {
 //export {connectDb};
 
 //export default models;
+module.exports = {
+  connectDb: connectDb;
+}
