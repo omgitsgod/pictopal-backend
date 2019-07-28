@@ -8,6 +8,6 @@ const connectDb = () => {
 
 const models = {User};
 
-export {connectDb};
+//export {connectDb};
 
 export default models;
