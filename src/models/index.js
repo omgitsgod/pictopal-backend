@@ -12,5 +12,5 @@ const connectDb = () => {
 
 //export default models;
 module.exports = {
-  connectDb: connectDb;
+  connectDb: connectDb
 }
