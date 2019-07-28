@@ -55,6 +55,8 @@ function isLoggedIn(req, res, next) {
   }
 }
 
+console.log(connectDb);
+
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
   res.end();
