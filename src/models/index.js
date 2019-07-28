@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-import user from './user'
+const user = require('./user')
 
 const connectDb = () => {
   return mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/pictopal');
