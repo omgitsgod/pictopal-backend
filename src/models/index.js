@@ -6,7 +6,7 @@ const connectDb = () => {
   return mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/pictopal');
 };
 
-const models = {User};
+//const models = {User};
 
 //export {connectDb};
 
