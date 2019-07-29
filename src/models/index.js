@@ -8,9 +8,7 @@ const connectDb = () => {
 
 const models = {User};
 
-//export {connectDb};
 
-//export default models;
 module.exports = {
   connectDb: connectDb,
   models: models,
