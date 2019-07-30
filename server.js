@@ -55,7 +55,7 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-console.log(models.models.User.User);
+console.log(models.models.User.User.Model);
 
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
