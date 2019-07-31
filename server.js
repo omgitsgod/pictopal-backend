@@ -57,6 +57,10 @@ function isLoggedIn(req, res, next) {
 
 console.log(models);
 
+connectDb()
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
+
 app.get('/', function(req, res, next){
   console.log("Accessing Index");
   res.end();
