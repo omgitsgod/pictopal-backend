@@ -9,6 +9,7 @@ const url = require('url');
 const redisURL = url.parse(process.env.REDIS_URL);
 const redisAuth = redisURL.auth.split(':');
 const redis = require('redis');
+const {connectDb, models} = require('./src/models')
 const redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
 const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
@@ -42,7 +43,6 @@ app.set('trust proxy')
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
-const models = require('./src/models')
 app.use(cors({
   origin: 'https://pictopal.netlify.com',
   credentials: true
