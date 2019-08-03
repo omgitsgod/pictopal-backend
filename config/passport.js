@@ -18,14 +18,39 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile.id);
-      const userData = {
-        email: profile.emails[0].value,
-        name: profile.displayName,
-        photo: profile.photos[0].value,
-        token: accessToken,
-        oauthID: profile.id
-      };
-      done(null, userData);
+      User.findOne({oauthID: profile.id}, (err, user) => {
+        if (err){
+          console.log(err);
+        }
+        if (!err && user !==null) {
+          done(null, user)
+        } else {
+          user = new User({
+            oauthID: profile.id,
+            email: profile.emails[0].value,
+            name: profile.displayName,
+            photo: profile.photos[0].value,
+            token: accessToken,
+            created: Date.now()
+          })
+          user.save((err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("saving user...");
+              done(null, user)
+            }
+          })
+        }
+      })
+  //    const userData = {
+  //      email: profile.emails[0].value,
+  //      name: profile.displayName,
+  //      photo: profile.photos[0].value,
+  //      token: accessToken,
+  //      oauthID: profile.id
+  //    };
+  //    done(null, userData);
     }
   )
 );
