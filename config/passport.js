@@ -22,7 +22,8 @@ passport.use(
         email: profile.emails[0].value,
         name: profile.displayName,
         photo: profile.photos[0].value,
-        token: accessToken
+        token: accessToken,
+        oauthID: profile.id
       };
       done(null, userData);
     }
