@@ -117,16 +117,23 @@ app.get(
 
 app.get(
   '/getUser', function(req, res) {
-    if (req.session.user) {
+    if (req.session.passport) {
       console.log('req.session test', req.session);
       console.log('id: ', req.session.id);
-      const skim = ({email, name, photo}) => ({email, name, photo})
-      if (logged.filter(x => x.token === req.session.user.token)[0]) {
-        const user = logged.filter(x => x.token === req.session.user.token)[0]
-        console.log('logging in: ', user.name);
-        console.log('currently online: ', loggedIn.map(x=> x.name));
-        res.status(200).json(user)
-      } else {req.session.destroy((err) =>console.log(err))}
+    //  const skim = ({email, name, photo}) => ({email, name, photo})
+    User.findById(req.session.passport.user, (err, user) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if (logged.filter(x => x.token === req.session.user.token)[0]) {
+           //const user = logged.filter(x => x.token === req.session.user.token)[0]
+
+           console.log('logging in: ', user.name);
+           console.log('currently online: ', loggedIn.map(x=> x.name));
+           res.status(200).json(user)
+         } else {req.session.destroy((err) =>console.log(err))}
+      }
+    })
     }
 	}
 );
