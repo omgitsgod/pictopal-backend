@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   photo: String,
   token: String,
+  oauthID: Number,
   created: Date,
 }, {timestamps: true});
 
