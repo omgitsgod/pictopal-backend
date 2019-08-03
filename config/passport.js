@@ -4,10 +4,20 @@ const User = require('../src/models/user')
 
 passport.serializeUser((user, done) => {
   console.log("Serializer : ", user._id)
-  done(null, user)
+  done(null, user._id)
 });
 
-passport.deserializeUser((user, done) => done(null, user));
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    console.log(user);
+    if (!err) {
+      done(null, user);
+    } else {
+      done(err, null);
+    }
+  })
+  done(null, user)
+});
 
 passport.use(
   new GoogleStrategy(
