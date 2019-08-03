@@ -121,7 +121,7 @@ app.get(
       console.log('req.session test', req.session);
       console.log('id: ', req.session.id);
     //  const skim = ({email, name, photo}) => ({email, name, photo})
-    User.findById(req.session.passport.user, (err, user) => {
+    models.User.findById(req.session.passport.user, (err, user) => {
       if (err) {
         console.log(err);
       } else {
