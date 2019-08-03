@@ -17,6 +17,7 @@ passport.use(
       callbackURL: `${process.env.HOST}/auth/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       const userData = {
         email: profile.emails[0].value,
         name: profile.displayName,
