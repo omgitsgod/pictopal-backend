@@ -95,4 +95,7 @@ routes.get(
   }
 );
 
+routes.loggedIn = loggedIn;
+routes.logged = logged;
+
 module.exports = routes;
