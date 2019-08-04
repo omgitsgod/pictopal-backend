@@ -1,5 +1,6 @@
 const routes = require('express').Router()
 const passport = require('passport');
+const {connectDb, models} = require('./src/models')
 require('../config/passport');
 
 
