@@ -1,4 +1,7 @@
 const routes = require('express').Router()
+const passport = require('passport');
+require('./config/passport');
+
 
 routes.get('/', function(req, res, next){
   console.log("Accessing Index");
