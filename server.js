@@ -10,6 +10,7 @@ const redisURL = url.parse(process.env.REDIS_URL);
 const redisAuth = redisURL.auth.split(':');
 const redis = require('redis');
 const routes = require('./routes')
+const sockets = require('./sockets')
 const {connectDb, models} = require('./src/models')
 const redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
 const redisStore = require('connect-redis')(session);
