@@ -48,7 +48,7 @@ app.use(cors({
   credentials: true
 }));
 function isLoggedIn(req, res, next) {
-  if (req.session.user !== undefined) {
+  if (req.session && req.session.passport) {
     next();
   } else {
     res.redirect("/");
