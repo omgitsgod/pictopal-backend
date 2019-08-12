@@ -1,5 +1,5 @@
-const logged = []
-const loggedIn = []
+let logged = []
+let loggedIn = []
 let clients = 0
 
 
