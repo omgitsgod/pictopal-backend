@@ -27,6 +27,7 @@ sockets = (ws, req) => {
     --clients
     console.log(`user disconnected, Clients: ${clients}`);
     liveList = liveList.filter(x => x.token !== req.session.user.token)
+    console.log('livelist', liveList);
 });
 }
 module.exports = sockets
