@@ -3,6 +3,7 @@ const {clients} = require('../constants')
 sockets = (ws, req) => {
   ws.on('message', function(msg) {
     console.log(msg);
+    console.log(req);
     ws.send(`You just said: ${msg}`)
   });
   ++clients
