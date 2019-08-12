@@ -3,15 +3,15 @@ let {clients, liveList} = require('../constants')
 
 sockets = (ws, req) => {
   if (req.session && req.session.passport) {
-    let user
+    let user;
     models.User.findById(req.session.passport.user, (err, u) => {
       if (err) {
         console.log(err);
       } else {
         user = u
       }
-    }
-    console.log("you are on the socket as", user);
+    })
+    console.log('YOU ARE ON THE SOCKET AS:', user);
   }
   ws.on('message', function(msg) {
     console.log(msg);
