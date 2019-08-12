@@ -9,7 +9,7 @@ sockets = (ws, req) => {
         console.log(err);
       } else {
         user = u
-        console.log('YOU ARE ON THE SOCKET AS:', user);
+        console.log('YOU ARE ON THE SOCKET AS:', user.name);
       }
     })
   }
