@@ -2,9 +2,7 @@ const {models} = require('../src/models')
 let {clients, liveList} = require('../constants')
 
 sockets = (ws, req) => {
-  ws.on('connection', () => {
-    console.log("YOU ARE CONNECTED");
-  })
+  console.log("YOU ARE CONNECTED");
   ws.on('message', function(msg) {
     console.log(msg);
     console.log(req.session);
