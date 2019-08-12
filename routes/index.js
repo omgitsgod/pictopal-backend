@@ -89,14 +89,12 @@ routes.get(
 
 routes.get(
   '/onlineList', function(req, res) {
-    const list = loggedIn.map(x => x.name)
-    res.status(200).json(list)
+    res.status(200).json(loggedIn.map(x => x.name))
   }
 );
 routes.get(
   '/liveList', function(req, res) {
-    const listy = liveList.map(x => x.name)
-    res.status(200).json(listy)
+    res.status(200).json(liveList.map(x => x.name))
   }
 );
 
