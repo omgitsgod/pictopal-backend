@@ -95,8 +95,8 @@ routes.get(
 );
 routes.get(
   '/liveList', function(req, res) {
-    const list = liveList.map(x => x.name)
-    res.status(200).json(list)
+    const listy = liveList.map(x => x.name)
+    res.status(200).json(listy)
   }
 );
 
