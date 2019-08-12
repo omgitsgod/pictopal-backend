@@ -2,8 +2,7 @@ const routes = require('express').Router()
 const passport = require('passport');
 const {connectDb, models} = require('../src/models')
 require('../config/passport');
-let loggedIn = []
-let logged = []
+const {logged, loggedIn} = require('../constants')
 
 
 routes.get('/', function(req, res, next){

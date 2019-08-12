@@ -1,4 +1,4 @@
-let clients = 0
+const {clients} = require('../constants')
 
 sockets = (ws, req) => {
   ws.on('message', function(msg) {
