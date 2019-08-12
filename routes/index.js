@@ -2,7 +2,7 @@ const routes = require('express').Router()
 const passport = require('passport');
 const {connectDb, models} = require('../src/models')
 require('../config/passport');
-const {logged, loggedIn} = require('../constants')
+const {logged, loggedIn, liveList} = require('../constants')
 
 
 routes.get('/', function(req, res, next){
@@ -90,6 +90,12 @@ routes.get(
 routes.get(
   '/onlineList', function(req, res) {
     const list = loggedIn.map(x => x.name)
+    res.status(200).json(list)
+  }
+);
+routes.get(
+  '/liveList', function(req, res) {
+    const list = liveList.map(x => x.name)
     res.status(200).json(list)
   }
 );

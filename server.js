@@ -16,9 +16,6 @@ const redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_rea
 const redisStore = require('connect-redis')(session);
 const expressWs = require('express-ws')(app);
 const port = process.env.PORT || 5000;
-let clients = 0
-let loggedIn = []
-let logged = []
 
 console.log(redisAuth);
 console.log('redisurl',redisURL);
