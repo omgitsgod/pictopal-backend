@@ -9,9 +9,9 @@ sockets = (ws, req) => {
         console.log(err);
       } else {
         user = u
+        console.log('YOU ARE ON THE SOCKET AS:', user);
       }
     })
-    console.log('YOU ARE ON THE SOCKET AS:', user);
   }
   ws.on('message', function(msg) {
     console.log(msg);
