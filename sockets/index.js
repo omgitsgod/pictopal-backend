@@ -14,15 +14,18 @@ sockets = (ws, req) => {
       }
     })
   }
+  if (clients === 0) {
+    req.session.ws = 'host'
+  } else {
+    req.session.ws = 'client'
+  }
   ++clients
-  ws.send('Hello! Message From Server!!')
-  req.session.clientNum = clients
   ws.on('message', function(msg) {
     console.log(msg);
     console.log(req.session);
-    if (req.session.clientNum > 1) {
+    if (req.session.ws === 'client') {
     ws.send(msg)
-  } 
+  }
   });
   console.log('clients:', clients);
 
@@ -31,7 +34,7 @@ sockets = (ws, req) => {
     console.log(`user disconnected, Clients: ${clients}`);
     liveList = liveList.filter(x => x.token !== req.session.user.token)
     console.log('livelist', liveList);
-    req.session.clientNum = null
+    req.session.ws = null
 });
 }
 module.exports = sockets
