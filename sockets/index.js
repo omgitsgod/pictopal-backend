@@ -16,6 +16,7 @@ sockets = (ws, req) => {
   }
   ++clients
   ws.send('Hello! Message From Server!!')
+  req.session.clientNum = clients
   ws.on('message', function(msg) {
     console.log(msg);
     console.log(req.session);
@@ -28,6 +29,7 @@ sockets = (ws, req) => {
     console.log(`user disconnected, Clients: ${clients}`);
     liveList = liveList.filter(x => x.token !== req.session.user.token)
     console.log('livelist', liveList);
+    req.session.clientNum = null
 });
 }
 module.exports = sockets
