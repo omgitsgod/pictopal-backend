@@ -20,7 +20,9 @@ sockets = (ws, req) => {
   ws.on('message', function(msg) {
     console.log(msg);
     console.log(req.session);
-    ws.send(`You just said: ${msg}`)
+    if req.session.clientNum > 1 {
+    ws.send(msg)
+  } ws.send(`You just said: ${msg}`)
   });
   console.log('clients:', clients);
 
