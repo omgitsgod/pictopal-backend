@@ -1,8 +1,8 @@
-const routes = require('express').Router()
+const routes = require('express').Router();
 const passport = require('passport');
-const {connectDb, models} = require('../src/models')
+const {connectDb, models} = require('../src/models');
 require('../config/passport');
-let {logged, loggedIn, liveList} = require('../constants')
+let {logged, loggedIn, liveList} = require('../constants');
 
 
 routes.get('/', function(req, res, next){
@@ -24,8 +24,8 @@ routes.get(
     req.session.user = req.user;
     console.log('id: ', req.session.id);
     console.log('session: ', req.session);
-    logged.push(user)
-    loggedIn.includes(user) ? null : loggedIn.push(user)
+    logged.push(user);
+    loggedIn.includes(user) ? null : loggedIn.push(user);
     console.log('Getting User:', loggedIn.map(x=> x.name));
 		res.redirect(`${process.env.CLIENT}`);
 	}
@@ -34,10 +34,10 @@ routes.get(
 routes.get(
   '/test', function(req, res) {
     console.log(req.session);
-    console.log('session id:', req.session.id)
-    const sessionKey = `sess:${req.session.id}`
+    console.log('session id:', req.session.id);
+    const sessionKey = `sess:${req.session.id}`;
     redisClient.get(sessionKey, (err, data) => {
-    console.log('session data in redis:', data)
+    console.log('session data in redis:', data);
   })
   res.status(200).send('OK');
 	}
@@ -52,10 +52,10 @@ routes.get(
 routes.get(
   '/logout/', function(req, res) {
     console.log('logging out: ', loggedIn.filter(x => x.token === req.session.user.token)[0].name);
-    loggedIn = loggedIn.filter(x => x.token !== req.session.user.token)
+    loggedIn = loggedIn.filter(x => x.token !== req.session.user.token);
     console.log('currently online: ', loggedIn.map(x=> x.name));
-    req.session.destroy((err) => console.log(err))
-    res.sendStatus(200)
+    req.session.destroy((err) => console.log(err));
+    res.sendStatus(200);
 	}
 );
 
@@ -74,7 +74,7 @@ routes.get(
 
            console.log('logging in: ', user.name);
            console.log('currently online: ', loggedIn.map(x=> x.name));
-           res.status(200).json(user)
+           res.status(200).json(user);
          } else {req.session.destroy((err) =>console.log(err))}
       }
     })
@@ -83,18 +83,18 @@ routes.get(
 );
 routes.get(
   '/close', function(req, res) {
-    req.session.store.clear((err) => console.log(err))
+    req.session.store.clear((err) => console.log(err));
 	}
 );
 
 routes.get(
   '/onlineList', function(req, res) {
-    res.status(200).json(loggedIn.map(x => x.name))
+    res.status(200).json(loggedIn.map(x => x.name));
   }
 );
 routes.get(
   '/liveList', function(req, res) {
-    res.status(200).json(liveList.map(x => x.name))
+    res.status(200).json(liveList.map(x => x.name));
   }
 );
 
