@@ -1,5 +1,5 @@
-const {models} = require('../src/models')
-let {clients, liveList} = require('../constants')
+const {models} = require('../src/models');
+let {clients, liveList} = require('../constants');
 let user;
 
 sockets = (ws, req) => {
@@ -8,33 +8,33 @@ sockets = (ws, req) => {
       if (err) {
         console.log(err);
       } else {
-        user = u
+        user = u;
         console.log('YOU ARE ON THE SOCKET AS:', user.name);
-        liveList.push(user)
+        liveList.push(user);
       }
     })
   }
   if (clients === 0) {
-    req.session.ws = 'host'
+    req.session.ws = 'host';
   } else {
-    req.session.ws = 'client'
+    req.session.ws = 'client';
   }
-  ++clients
+  ++clients;
   ws.on('message', function(msg) {
-    console.log(msg);
     console.log(req.session);
     if (req.session.ws === 'host') {
-    ws.send(msg)
-  }
+      console.log(msg);
+      ws.send(msg);
+    }
   });
   console.log('clients:', clients);
 
   ws.on('close', () => {
-    --clients
+    --clients;
     console.log(`user disconnected, Clients: ${clients}`);
-    liveList = liveList.filter(x => x.token !== req.session.user.token)
+    liveList = liveList.filter(x => x.token !== req.session.user.token);
     console.log('livelist', liveList);
     req.session.ws = null
-});
-}
-module.exports = sockets
+  });
+};
+module.exports = sockets;
