@@ -1,7 +1,7 @@
-let logged = []
-let loggedIn = []
-let liveList = []
-let clients = 0
+let logged = [];
+let loggedIn = [];
+let liveList = [];
+let clients = 0;
 
 
 module.exports = {
@@ -9,4 +9,4 @@ module.exports = {
   loggedIn,
   clients,
   liveList,
-}
+};
