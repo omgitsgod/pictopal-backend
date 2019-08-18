@@ -23,7 +23,7 @@ sockets = (ws, req) => {
   ws.on('message', function(msg) {
     console.log(msg);
     console.log(req.session);
-    if (req.session.ws === 'client') {
+    if (req.session.ws === 'host') {
     ws.send(msg)
   }
   });
