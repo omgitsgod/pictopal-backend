@@ -22,7 +22,6 @@ sockets = (ws, req) => {
   ++clients;
   console.log('clients:', clients);
   console.log('ws', ws);
-  ws.setTimeout(500000);
 
   ws.on('message', (msg) => {
     console.log(req.session);
