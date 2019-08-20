@@ -3,27 +3,26 @@ let {clients, liveList} = require('../constants');
 let user;
 
 sockets = (ws, req) => {
-  ws.on('open', () => {
-    if (req.session && req.session.passport) {
-      models.User.findById(req.session.passport.user, (err, u) => {
-        if (err) {
-          console.log(err);
-        } else {
-          user = u;
-          console.log('YOU ARE ON THE SOCKET AS:', user.name);
-          liveList.push(user);
-        }
-      })
-    }
-    if (clients === 0) {
-      req.session.ws = 'host';
-    } else {
-      req.session.ws = 'client';
-    }
-    ++clients;
-    console.log('clients:', clients);
-    console.log('ws', ws);
-  });
+  if (req.session && req.session.passport) {
+    models.User.findById(req.session.passport.user, (err, u) => {
+      if (err) {
+        console.log(err);
+      } else {
+        user = u;
+        console.log('YOU ARE ON THE SOCKET AS:', user.name);
+        liveList.push(user);
+      }
+    })
+  }
+  if (clients === 0) {
+    req.session.ws = 'host';
+  } else {
+    req.session.ws = 'client';
+  }
+  ++clients;
+  console.log('clients:', clients);
+  console.log('ws', ws);
+
   ws.on('message', (msg) => {
     console.log(req.session);
     if (req.session.ws === 'host') {
