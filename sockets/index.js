@@ -22,6 +22,7 @@ sockets = (ws, req) => {
     }
     ++clients;
     console.log('clients:', clients);
+    console.log('ws', ws);
   });
   ws.on('message', (msg) => {
     console.log(req.session);
