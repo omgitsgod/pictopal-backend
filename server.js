@@ -65,4 +65,3 @@ app.use('/', routes);
 app.ws('/', sockets);
 
 app.listen(port, ()=> console.log(`Listening on port ${port}`));
-app.timeout = 500000;
