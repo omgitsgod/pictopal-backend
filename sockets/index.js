@@ -2,7 +2,6 @@ const sockets = require('express').Router();
 const {models} = require('../src/models');
 let {clients, liveList} = require('../constants');
 let user;
-
 sockets.ws('/', (ws, req) => {
   if (req.session && req.session.passport) {
     models.User.findById(req.session.passport.user, (err, u) => {
@@ -37,5 +36,5 @@ sockets.ws('/', (ws, req) => {
     console.log('livelist', liveList);
     req.session.ws = null
   });
-};)
+});
 module.exports = sockets;
