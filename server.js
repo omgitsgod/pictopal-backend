@@ -64,6 +64,5 @@ app.use('/', routes);
 
 app.ws('/', sockets);
 
-console.log('ws', app.ws);
 
 app.listen(port, ()=> console.log(`Listening on port ${port}`));
