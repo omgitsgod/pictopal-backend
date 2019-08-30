@@ -28,7 +28,7 @@ sockets = (ws, req) => {
     if (req.session.ws === 'host') {
       console.log(msg);
       ws.send(msg);
-      const objs = JSON.parse(msg).objects
+      const objs = JSON.parse(msg)
       console.log(objs);
     }
   });
