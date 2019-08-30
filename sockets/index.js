@@ -21,10 +21,6 @@ sockets = (ws, req) => {
   }
   ++clients;
   console.log('clients:', clients);
-  ws.setTimeout(() => {
-    console.log("Setting timeout to 10 minutes");;
-  }, 500000)
-  ws.timeout = 500000;
   console.log('ws', ws);
 
   ws.on('message', (msg) => {
