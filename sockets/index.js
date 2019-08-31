@@ -24,7 +24,7 @@ sockets = (ws, req) => {
 
   ws.on('message', (msg) => {
     console.log(req.session);
-    if (req.session.ws === 'client') {
+    if (req.session.ws === 'host') {
       ws.send(msg);
       console.log("incoming: ", msg);
       console.log("msg type: ", typeof msg)
