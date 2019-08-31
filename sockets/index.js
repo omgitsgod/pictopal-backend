@@ -28,6 +28,8 @@ sockets = (ws, req) => {
       ws.send(msg);
       console.log("incoming: ", msg);
       console.log("msg type: ", typeof msg)
+    } else {
+      console.log("else else else");
     }
   });
 
