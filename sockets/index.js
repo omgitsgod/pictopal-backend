@@ -23,14 +23,13 @@ sockets = (ws, req) => {
   console.log('clients:', clients);
 
   ws.on('message', (msg) => {
-    console.log(req.session);
+    const message = JSON.parse(msg)
     if (req.session.ws === 'host') {
-      ws.send(msg);
-      console.log("incoming: ", msg);
-      console.log("msg type: ", typeof msg)
+      message.client = 'host'
     } else {
-      console.log("else else else");
+      message.client = 'client'
     }
+    ws.send(JSON.stringify(message));
   });
 
   ws.on('close', () => {
