@@ -55,6 +55,7 @@ function isLoggedIn(req, res, next) {
 }
 
 console.log(models);
+console.log(sockets);
 
 connectDb()
   .then(() =>  console.log('connection succesful'))
