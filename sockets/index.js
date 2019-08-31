@@ -29,6 +29,7 @@ sockets = (ws, req) => {
     } else {
       message.client = 'client'
     }
+    console.log(message);
     ws.send(JSON.stringify(message));
   });
 
