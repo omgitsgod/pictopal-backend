@@ -23,6 +23,7 @@ sockets = (ws, req) => {
   console.log('clients:', clients);
 
   ws.on('message', (msg) => {
+    console.log(msg);
     const message = JSON.parse(msg)
     if (req.session.ws === 'host') {
       message.client = 'host'
